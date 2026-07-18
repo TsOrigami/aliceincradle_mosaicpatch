@@ -9,21 +9,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Set up Visual Studio 2022
-        uses: microsoft/setup-msbuild@v2
-        with:
-          vs-version: '[17.0,18.0)'
-          
       - name: Set up Python3.13
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.13' 
           
       - name: Patch Assembly-CSharp.dll
         run: |
-          
           $ildasm = "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\ildasm.exe"
           $ilasm = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ilasm.exe"
 
@@ -96,8 +90,7 @@ jobs:
           }
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Mosaic Patched DLL
           path: output\Assembly-CSharp.dll
-          
